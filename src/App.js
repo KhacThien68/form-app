@@ -1,23 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import ChiPhiThu from "./Components/ChiPhiThu";
+import ChiPhiChi from "./Components/ChiPhiChi";
+import { data } from "./constants";
+import { useEffect, useState } from "react";
 
 function App() {
+  const [thuData, setThuData] = useState([]);
+  const [chiData, setChiData] = useState([]);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("aaaa");
+  };
+  useEffect(() => {
+    if (data) {
+      setThuData(data.chiPhiPhatSinhThuArr);
+      setChiData(data.chiPhiPhatSinhChiArr);
+    }
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <form>
+        <ChiPhiThu data={thuData} setData={setThuData} />
+        <ChiPhiChi data={chiData} setData={setChiData} />
+        <button onClick={(e) => handleSubmit(e)}>Submit</button>
+      </form>
     </div>
   );
 }
